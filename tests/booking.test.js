@@ -51,3 +51,15 @@ test('store survives a storage that throws (private mode)', () => {
   b.save({ trip: 'bhrigu-lake', step: 2 });
   assert.equal(b.load().step, 2);
 });
+
+test('createStore falls back to memory when reading sessionStorage itself throws', () => {
+  const desc = Object.getOwnPropertyDescriptor(globalThis, 'sessionStorage');
+  Object.defineProperty(globalThis, 'sessionStorage', { configurable: true, get() { throw new Error('SecurityError'); } });
+  try {
+    const s = createStore();
+    s.save({ trip: 'kedarkantha', step: 1 });
+    assert.equal(s.load().step, 1);
+  } finally {
+    if (desc) Object.defineProperty(globalThis, 'sessionStorage', desc); else delete globalThis.sessionStorage;
+  }
+});

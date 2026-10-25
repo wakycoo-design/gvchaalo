@@ -26,7 +26,12 @@ export function makeRef(code, rand = Math.random) {
 
 // sessionStorage can be missing or throw (private browsing, blocked storage);
 // the booking then lives in memory for as long as the page is open.
-export function createStore(storage = globalThis.sessionStorage) {
+function defaultStorage() {
+  // Merely reading sessionStorage throws a SecurityError when the browser blocks storage.
+  try { return globalThis.sessionStorage; } catch { return undefined; }
+}
+
+export function createStore(storage = defaultStorage()) {
   let memory = null;
   return {
     load() {

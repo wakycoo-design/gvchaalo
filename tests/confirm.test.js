@@ -27,3 +27,15 @@ test('confirmGuard sends visitors without a paid booking home', () => {
   assert.equal(confirmGuard({ trip: 'kedarkantha' }), 'index.html');
   assert.equal(confirmGuard({ trip: 'kedarkantha', ref: 'GVC-KDK-12345' }), null);
 });
+
+test('confirmation can be rebuilt from the URL when storage was unavailable', async () => {
+  const { bookingFromParams } = await import('../assets/js/confirm.js');
+  const b = bookingFromParams(new URLSearchParams('ref=GVC-KDK-44200&trip=kedarkantha&date=2026-12-13&pax=2&paid=4000&mode=advance'));
+  assert.equal(b.ref, 'GVC-KDK-44200');
+  assert.equal(b.trip, 'kedarkantha');
+  assert.equal(b.paidAmount, 4000);
+  assert.equal(b.payMode, 'advance');
+  assert.equal(b.travellers.length, 0);
+  assert.equal(bookingFromParams(new URLSearchParams('')), null);
+  assert.equal(bookingFromParams(new URLSearchParams('ref=GVC-XXX-1&trip=nope&date=2026-12-13')), null);
+});

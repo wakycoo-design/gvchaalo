@@ -14,8 +14,12 @@ export function resolveEntry(params, saved) {
   const first = trek.departures.find(d => d.seatsLeft > 0);
   if (!first) return { redirect: `trip.html?id=${trek.slug}` };
 
-  const resume = saved && saved.trip === trek.slug && !saved.ref ? saved : null;
-  const date = (openDep(trek, params.get('date') ?? '') ?? openDep(trek, resume?.date ?? '') ?? first).id;
+  let resume = saved && saved.trip === trek.slug && !saved.ref ? saved : null;
+  const urlDep = openDep(trek, params.get('date') ?? '');
+  // Arriving with a different batch than the saved one: start over at step 0 so the
+  // customer confirms the new batch, but keep the details they already typed.
+  if (resume && urlDep && urlDep.id !== resume.date) resume = { ...resume, step: 0, terms: false };
+  const date = (urlDep ?? openDep(trek, resume?.date ?? '') ?? first).id;
   const dep = openDep(trek, date);
   const base = resume ?? { travellers: [], emergency: { name: '', phone: '' }, addOns: [], payMode: 'full', step: 0, pax: 1 };
   return { booking: { ...base, trip: trek.slug, date, pax: clampPax(base.pax, dep.seatsLeft) } };
@@ -328,7 +332,8 @@ function init() {
       setTimeout(() => {
         b = { ...b, ref: makeRef(trek.code), paidAt: new Date().toISOString(), paidAmount: price().payNow };
         save();
-        location.href = 'confirm.html';
+        const q = new URLSearchParams({ ref: b.ref, trip: b.trip, date: b.date, pax: String(b.pax), paid: String(b.paidAmount), mode: b.payMode });
+        location.href = `confirm.html?${q}`;
       }, 1600);
     }
   });

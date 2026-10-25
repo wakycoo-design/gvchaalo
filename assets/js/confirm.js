@@ -7,11 +7,28 @@ export function confirmGuard(booking) {
   return booking?.ref ? null : 'index.html';
 }
 
+// Fallback when storage was unavailable: book.js also passes the essentials in the URL.
+export function bookingFromParams(params) {
+  const ref = params.get('ref');
+  const trek = getTrek(params.get('trip') ?? '');
+  const date = params.get('date');
+  if (!ref || !trek || !trek.departures.some(d => d.id === date)) return null;
+  return {
+    ref, trip: trek.slug, date,
+    pax: Number(params.get('pax')) || 1,
+    paidAmount: Number(params.get('paid')) || 0,
+    payMode: params.get('mode') === 'advance' ? 'advance' : 'full',
+    travellers: []
+  };
+}
+
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 function init() {
   const store = createStore();
-  const b = store.load();
+  const params = new URLSearchParams(location.search);
+  const saved = store.load();
+  const b = saved?.ref && saved.ref === (params.get('ref') ?? saved.ref) ? saved : bookingFromParams(params);
   const redirect = confirmGuard(b);
   const trek = b && getTrek(b.trip);
   if (redirect || !trek) { location.replace('index.html'); return; }
@@ -26,7 +43,7 @@ function init() {
     ['Trek', `${esc(trek.name)} · ${trek.days} days`],
     ['Batch', dates],
     ['Meet', `${esc(trek.start)}, 6:30 AM on day 1`],
-    ['Travellers', b.travellers.map(t => esc(t.name)).join(', ')],
+    ['Travellers', b.travellers.length ? b.travellers.map(t => esc(t.name)).join(', ') : `${b.pax} ${b.pax === 1 ? 'trekker' : 'trekkers'}`],
     ['Paid', `${formatINR(b.paidAmount ?? 0)}${b.payMode === 'advance' ? ' advance · balance due 15 days before' : ' · paid in full'}`]
   ].map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join(''));
 

@@ -54,3 +54,18 @@ test('validateEmergency needs a name and a phone', () => {
   assert.deepEqual(Object.keys(validateEmergency({ name: '', phone: '' })).sort(), ['name', 'phone']);
   assert.deepEqual(validateEmergency({ name: 'Amma', phone: '9847012345' }), {});
 });
+
+test('a saved booking opened with a different date restarts at the batch step but keeps travellers', () => {
+  const saved = { trip: 'kedarkantha', date: '2026-12-13', pax: 2, addOns: ['gear'], travellers: [{ name: 'Arjun Menon' }], step: 3, payMode: 'full', terms: true };
+  const { booking } = resolveEntry(new URLSearchParams('trip=kedarkantha&date=2026-12-20'), saved);
+  assert.equal(booking.date, '2026-12-20');
+  assert.equal(booking.step, 0);
+  assert.equal(booking.terms, false);
+  assert.equal(booking.travellers[0].name, 'Arjun Menon');
+});
+
+test('a saved booking opened with the same or no date resumes its step', () => {
+  const saved = { trip: 'kedarkantha', date: '2026-12-13', pax: 2, addOns: [], travellers: [], step: 3, payMode: 'full' };
+  assert.equal(resolveEntry(new URLSearchParams('trip=kedarkantha&date=2026-12-13'), saved).booking.step, 3);
+  assert.equal(resolveEntry(new URLSearchParams('trip=kedarkantha'), saved).booking.step, 3);
+});
