@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>gv.chaalo — Himalayan treks from Kerala</title>
+  <meta name="description" content="Small-batch Himalayan treks with a crew from Kerala. Kedarkantha, Annapurna Base Camp and Bhrigu Lake. Book your seat online.">
+  <meta name="theme-color" content="#2268BA">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Overpass:wght@800&display=swap">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/hero.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body class="page-home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-header>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="gv.chaalo home">
+        <svg class="brand__mark" viewBox="0 0 44 28" aria-hidden="true"><path d="M2 26 L14 10 L20 17 L28 3 L42 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M24.6 9 L28 3 L31.4 9 L29.4 7.8 L27.2 10 Z" fill="currentColor"/></svg>
+        <span class="brand__word">gv.chaalo</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="index.html#treks">Treks</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="site-nav__book" href="trip.html?id=kedarkantha">Book</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>Menu</button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" hidden data-menu>
+    <nav class="container menu__nav" aria-label="Mobile">
+      <a href="index.html#treks">Treks</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="trip.html?id=kedarkantha">Book a trek</a>
+    </nav>
+    <p class="container menu__foot">+91 97784 48026 · Kerala</p>
+  </div>
+
+  <main id="main">
+    <section class="hero" aria-label="Introduction" data-hero>
+      <div class="hero__sky" data-sky></div>
+      <div class="hero__clouds" aria-hidden="true">
+        <span class="cloud cloud--a"></span>
+        <span class="cloud cloud--b"></span>
+        <span class="cloud cloud--c"></span>
+      </div>
+      <svg class="hero__wires" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-20 214 Q720 246 1460 206" vector-effect="non-scaling-stroke"/>
+      </svg>
+
+      <div class="sign-stage" id="sign-stage">
+        <div class="sign" data-sign>
+          <span class="sign__hanger sign__hanger--l" aria-hidden="true"></span>
+          <span class="sign__hanger sign__hanger--r" aria-hidden="true"></span>
+          <div class="sign__plate">
+            <span class="sign__bolt sign__bolt--tl" aria-hidden="true"></span>
+            <span class="sign__bolt sign__bolt--tr" aria-hidden="true"></span>
+            <span class="sign__bolt sign__bolt--bl" aria-hidden="true"></span>
+            <span class="sign__bolt sign__bolt--br" aria-hidden="true"></span>
+            <svg class="sign__arrow" viewBox="0 0 74 96" aria-hidden="true"><path d="M37 2 L72 44 L48 44 L48 94 L26 94 L26 44 L2 44 Z"/></svg>
+            <div class="sign__window" aria-live="off">
+              <div class="sign__msg" data-sign-msg>
+                <span class="sign__title">GVQ</span>
+                <span class="sign__sub">This way to the Himalaya</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container hero__copy">
+        <p class="label hero__label">Himalayan treks · from Kerala</p>
+        <h1 class="hero__title">Small groups. Big mountains. <br>Everything sorted from the base city.</h1>
+        <div class="hero__actions">
+          <a class="btn" href="#treks">Explore treks</a>
+          <a class="link-arrow" href="https://wa.me/919778448026">WhatsApp us</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section treks" id="treks" aria-labelledby="treks-title">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="label">01 — Treks</p>
+          <h2 class="section-title" id="treks-title">Three treks. Done properly.</h2>
+        </header>
+        <div class="trek-rows" id="trek-rows"></div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="container grid about__grid">
+        <figure class="about__media" data-reveal-img>
+          <img src="assets/img/gallery-road.jpg" width="1400" height="2100" loading="lazy" alt="A mountain road winding toward a snow-capped range">
+        </figure>
+        <div class="about__text">
+          <p class="label" data-reveal>02 — About</p>
+          <h2 class="sr-only" id="about-title">About gv.chaalo</h2>
+          <p class="about__lede" data-reveal>gv.chaalo is a trekking crew from Kerala. We take small groups, never more than twenty, into the Himalaya with certified leaders, good food and every permit sorted from the base city.</p>
+          <p class="about__lede about__lede--quiet" data-reveal>You bring the legs. We handle the rest.</p>
+          <p class="about__sign" data-reveal>Chaalo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section trail" aria-labelledby="trail-title">
+      <div class="container trail__head" data-reveal>
+        <div>
+          <p class="label">03 — From the trail</p>
+          <h2 class="section-title" id="trail-title">Moments from recent batches.</h2>
+        </div>
+        <a class="link-arrow" href="https://www.instagram.com/gv.chaalo">@gv.chaalo on Instagram</a>
+      </div>
+      <div class="trail__strip" data-strip>
+        <div class="trail__track" data-strip-track>
+          <img src="assets/img/gallery-trekkers.jpg" width="1400" height="934" loading="lazy" alt="Two trekkers walking toward snowy peaks">
+          <img src="assets/img/gallery-tent.jpg" width="1400" height="934" loading="lazy" alt="Looking out of a tent at a forest camp">
+          <img src="assets/img/gallery-stupa.jpg" width="1400" height="933" loading="lazy" alt="A stupa on a Himalayan trail with peaks behind">
+          <img src="assets/img/gallery-milkyway.jpg" width="1400" height="934" loading="lazy" alt="The Milky Way above snowy mountains">
+          <img src="assets/img/gallery-peak.jpg" width="1400" height="927" loading="lazy" alt="A sharp snow peak under passing cloud">
+        </div>
+      </div>
+    </section>
+
+    <section class="section words" aria-labelledby="words-title">
+      <div class="container words__inner">
+        <h2 class="label" id="words-title" data-reveal>Words from trekkers</h2>
+        <figure class="quote" data-quotes>
+          <blockquote class="quote__text" data-quote-text>[A real review from a gv.chaalo trekker goes here — taken from Google or Instagram.]</blockquote>
+          <figcaption class="quote__by" data-quote-by>[Name] · Kedarkantha, Dec 2025</figcaption>
+        </figure>
+        <div class="quote__controls">
+          <button type="button" class="icon-btn" aria-label="Previous review" data-quote-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <span class="quote__count" data-quote-count>1 / 3</span>
+          <button type="button" class="icon-btn" aria-label="Next review" data-quote-next><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-cta" data-reveal>
+        <p class="footer-cta__title display">The mountains<br>are calling.</p>
+        <p class="footer-cta__sign display">Chaalo.</p>
+        <a class="btn" href="https://wa.me/919778448026">WhatsApp 97784 48026</a>
+      </div>
+      <div class="footer-bar">
+        <a class="brand" href="index.html" aria-label="gv.chaalo home">
+          <svg class="brand__mark" viewBox="0 0 44 28" aria-hidden="true"><path d="M2 26 L14 10 L20 17 L28 3 L42 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M24.6 9 L28 3 L31.4 9 L29.4 7.8 L27.2 10 Z" fill="currentColor"/></svg>
+          <span class="brand__word">gv.chaalo</span>
+        </a>
+        <ul class="footer-bar__links">
+          <li><a href="https://www.instagram.com/gv.chaalo">Instagram</a></li>
+          <li><a href="tel:+919778448026">+91 97784 48026</a></li>
+          <li>[Second number]</li>
+          <li>Kerala, India</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <a class="fab" href="https://wa.me/919778448026" aria-label="Chat with gv.chaalo on WhatsApp" data-fab>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.6a8.5 8.5 0 0 1-12.5 7.5L3.5 20.5l1.4-4.3A8.5 8.5 0 1 1 20.5 11.6z"/></svg>
+  </a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="assets/js/home.js"></script>
+</body>
+</html>

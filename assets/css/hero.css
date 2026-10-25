@@ -1,0 +1,137 @@
+/* Hero: blue sky, overhead wires and the "↑ GVQ" highway sign.
+   Everything here renders statically; hero-sign.js only adds motion. */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  max-height: 1100px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero__sky {
+  --sky-top: #2268BA;
+  --sky-mid: #4D96DE;
+  --sky-bottom: #CFE4F6;
+  position: absolute; inset: 0; z-index: -2;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 50%, var(--sky-bottom) 100%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0; height: 140px; z-index: -1;
+  background: linear-gradient(180deg, rgba(247, 249, 251, 0), var(--snow));
+  pointer-events: none;
+}
+
+/* Clouds */
+.hero__clouds { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.cloud {
+  position: absolute; display: block;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  filter: blur(22px);
+  animation: cloud-drift 38s ease-in-out infinite alternate;
+}
+.cloud--a { width: 34vw; height: 7vw; min-height: 48px; top: 36%; left: -6vw; }
+.cloud--b { width: 26vw; height: 5vw; min-height: 36px; top: 12%; right: -4vw; opacity: .7; animation-duration: 46s; animation-direction: alternate-reverse; }
+.cloud--c { width: 22vw; height: 4.5vw; min-height: 32px; top: 58%; right: 14vw; opacity: .6; animation-duration: 52s; }
+@keyframes cloud-drift { from { transform: translateX(-4vw); } to { transform: translateX(6vw); } }
+
+/* Wires */
+.hero__wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.hero__wires path { fill: none; stroke: rgba(15, 26, 20, 0.82); stroke-width: 1.5; }
+.hero__wires .hero__wire--far { stroke: rgba(15, 26, 20, 0.35); stroke-width: 1; }
+
+/* Sign. The stage's top sits on the upper wire at the centre of the curve (≈25.3% of the hero). */
+.sign-stage {
+  position: absolute; left: 0; right: 0; top: 25.3%; z-index: 1;
+  display: flex; justify-content: center;
+  pointer-events: none;
+}
+.sign {
+  position: relative;
+  padding-top: 20px;
+  transform-origin: 50% 0;
+  will-change: transform;
+}
+.sign__hanger {
+  position: absolute; top: -4px; width: 8px; height: 30px;
+  background: #3A4642; border-radius: 1px;
+}
+.sign__hanger--l { left: 22%; }
+.sign__hanger--r { right: 22%; }
+
+.sign__plate {
+  --win-h: clamp(64px, 8.6vw, 124px);
+  position: relative;
+  display: flex; align-items: center; gap: clamp(16px, 2.4vw, 36px);
+  width: clamp(300px, 46vw, 660px);
+  padding: clamp(16px, 2vw, 28px) clamp(22px, 3.2vw, 46px) clamp(16px, 2vw, 28px) clamp(18px, 2.6vw, 38px);
+  background: var(--green);
+  color: #EEF2EF;
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 0 4px var(--green),
+    inset 0 0 0 6px #E4EAE6,
+    0 1px 0 rgba(255, 255, 255, 0.15),
+    0 34px 60px -24px rgba(8, 30, 60, 0.45);
+}
+.sign__bolt {
+  position: absolute; width: 6px; height: 6px; border-radius: 50%;
+  background: #9AA6A0;
+}
+.sign__bolt--tl { top: 12px; left: 12px; }
+.sign__bolt--tr { top: 12px; right: 12px; }
+.sign__bolt--bl { bottom: 12px; left: 12px; }
+.sign__bolt--br { bottom: 12px; right: 12px; }
+
+.sign__arrow { flex: 0 0 auto; width: clamp(34px, 4.4vw, 66px); height: auto; fill: #EEF2EF; }
+
+.sign__window { position: relative; flex: 1 1 auto; height: var(--win-h); overflow: hidden; }
+.sign__msg {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.sign__title {
+  font-family: var(--sign);
+  font-weight: 800;
+  font-size: calc(var(--win-h) * 0.82);
+  line-height: 0.86;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.sign__sub {
+  margin-top: calc(var(--win-h) * 0.07);
+  font-family: var(--sign);
+  font-weight: 800;
+  font-size: clamp(9px, 0.95vw, 13px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+/* Copy */
+.hero__copy {
+  position: absolute; left: 0; right: 0; bottom: clamp(48px, 9vh, 96px); z-index: 1;
+  margin-inline: auto;
+}
+.hero__label { color: #2F4A5E; }
+.hero__title {
+  margin-top: 16px;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin-top: 32px; }
+
+@media (max-width: 600px) {
+  .sign-stage { top: 23%; }
+  .sign__plate { width: min(90vw, 380px); --win-h: 64px; }
+  .hero__title br { display: none; }
+}
