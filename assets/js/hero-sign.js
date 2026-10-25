@@ -3,9 +3,10 @@
 // crossfades to that trek. Time-based, never scroll-jacked.
 
 export const HOLD_FIRST_MS = 4000;
-export const HOLD_MS = 3000;
+export const HOLD_MS = 5500;
 
-const FADE_S = 1.3;
+// Changes are meant to be felt more than seen: long holds, slow dissolves.
+const FADE_S = 2.4;
 const HERO_IMG = {
   home: 'assets/img/hero-gvq.jpg',
   kedarkantha: 'assets/img/hero-kedarkantha.jpg',
@@ -54,7 +55,6 @@ function fitTitle(msgEl, windowEl) {
 export function initHeroSign(stage, messages) {
   const gsap = window.gsap;
   const sign = stage.querySelector('[data-sign]');
-  const plate = stage.querySelector('.sign__plate');
   const win = stage.querySelector('.sign__window');
   const hero = stage.closest('[data-hero]');
   const media = hero?.querySelector('[data-hero-media]');
@@ -94,7 +94,7 @@ export function initHeroSign(stage, messages) {
   let running = true;
 
   // Slow push-in on the visible photograph for as long as it is on screen.
-  const pushIn = (img, seconds) => gsap.fromTo(img, { scale: 1.1 }, { scale: 1, duration: seconds, ease: 'none', overwrite: 'auto' });
+  const pushIn = (img, seconds) => gsap.fromTo(img, { scale: 1.045 }, { scale: 1, duration: seconds, ease: 'none', overwrite: 'auto' });
 
   function schedule() {
     timer?.kill();
@@ -118,7 +118,7 @@ export function initHeroSign(stage, messages) {
   setIndex(0);
 
   function startSway() {
-    gsap.to(sign, { rotation: 0.6, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to(sign, { rotation: 0.4, duration: 4.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
   }
 
   function advance() {
@@ -127,17 +127,17 @@ export function initHeroSign(stage, messages) {
     const next = buildMsg(messages[at]);
     win.appendChild(next);
     fitTitle(next, win);
+    // Soft dissolve: the old words drift out of focus, the new ones settle in.
     gsap.timeline()
-      .fromTo(next, { yPercent: 110 }, { yPercent: 0, duration: 0.75, ease: 'power3.inOut' }, 0)
-      .to(current, { yPercent: -110, duration: 0.75, ease: 'power3.inOut', onComplete: (old => () => old.remove())(current) }, 0)
-      .to(plate, { y: 3, duration: 0.18, ease: 'power2.out', yoyo: true, repeat: 1 }, 0.05);
+      .to(current, { opacity: 0, filter: 'blur(4px)', y: -3, duration: 1, ease: 'sine.inOut', onComplete: (old => () => old.remove())(current) }, 0)
+      .fromTo(next, { opacity: 0, filter: 'blur(4px)', y: 3 }, { opacity: 1, filter: 'blur(0px)', y: 0, duration: 1.2, ease: 'sine.inOut' }, 0.55);
     current = next;
 
     const out = imgs[prev], inn = imgs[at];
     if (out && inn) {
       gsap.set(inn, { zIndex: 2 });
       gsap.set(out, { zIndex: 1 });
-      gsap.fromTo(inn, { opacity: 0 }, { opacity: 1, duration: FADE_S, ease: 'power2.inOut', onComplete: () => gsap.set(out, { opacity: 0 }) });
+      gsap.fromTo(inn, { opacity: 0 }, { opacity: 1, duration: FADE_S, ease: 'sine.inOut', onComplete: () => gsap.set(out, { opacity: 0 }) });
       pushIn(inn, holdFor(at) / 1000 + FADE_S + 1);
     }
     setIndex(at);

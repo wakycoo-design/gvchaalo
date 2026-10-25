@@ -14,10 +14,10 @@ test('GVQ comes first, then one message per trek', () => {
   assert.equal(msgs[3].name, 'Bhrigu Lake');
 });
 
-test('GVQ holds 4 seconds, each trek 3 seconds', () => {
+test('GVQ holds 4 seconds, each trek 5.5 seconds', () => {
   assert.equal(HOLD_FIRST_MS, 4000);
-  assert.equal(HOLD_MS, 3000);
+  assert.equal(HOLD_MS, 5500);
   assert.equal(holdFor(0), 4000);
-  assert.equal(holdFor(1), 3000);
-  assert.equal(holdFor(3), 3000);
+  assert.equal(holdFor(1), 5500);
+  assert.equal(holdFor(3), 5500);
 });
