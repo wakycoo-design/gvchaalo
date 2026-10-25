@@ -30,13 +30,31 @@ blog, multi-language, search/filter page (only 3 trips).
 
 - **Name on site:** `gv.chaalo` with the mountain-peak logomark (recreated as SVG from the
   Instagram logo). Hero sign reads **↑ GVQ** as supplied by the client.
-- **Mood:** Young, adventurous, outdoorsy; big edge-to-edge mountain photography; bold
-  condensed headlines like their Instagram posters (e.g. "ANNAPURNA", "KEDARKANTHA").
-- **Palette:** highway-sign green `#1E6B47`, logo green `#178A3E`, sky blue `#4A90D9`,
-  snow white `#F7F9FB`, ink `#0F1A14`, alpine-glow orange accent `#F2A33A`.
-- **Type:** Anton (display, poster headlines), Overpass (sign lettering — derived from
-  Highway Gothic, and UI), Inter (body). Google Fonts.
-- **Motion:** GSAP + ScrollTrigger. Smooth, purposeful; respects `prefers-reduced-motion`.
+- **Mood:** Quiet, confident, editorial — the photography does the talking. It should read
+  like a senior designer's work, not a template: when a customer lands, the reaction is
+  "this is beautiful", and nothing on screen competes for attention.
+- **Palette:** mostly snow `#F7F9FB` / white and ink `#0F1A14`. Highway-sign green `#1E6B47`
+  is the ONE accent (the sign, primary buttons, links). Sky blue only in the hero.
+  No orange, no second accent.
+- **Type:** Anton for trek names and a few big headlines only (their Instagram poster voice);
+  Inter for everything else. Overpass appears only on the sign plate. Tight, consistent
+  scale: 12 / 14 / 16 / 20 / 28 / 48 / 96+.
+- **Motion:** GSAP + ScrollTrigger. Slow, eased (600–900ms), nothing bouncy except the sign's
+  swing. Text reveals line by line; images ease in with a slight scale. Respects
+  `prefers-reduced-motion`.
+
+**Design rules (what removes the "AI / template" feel):**
+- No pill badges, no icon-feature grids, no stat counters, no star-glyph rows, no emoji,
+  no ✓/✕ bullet lists, no drop shadows (except the sign), no stacked gradient overlays.
+- Corners square or 2px; separation by whitespace and 1px hairlines, not boxes and cards.
+- One idea per screen. Generous whitespace (section padding 160px desktop / 96px mobile).
+- Strict 12-column grid; asymmetric editorial layouts (big photo + narrow text column),
+  not three equal cards.
+- Small uppercase labels used sparingly (section numbers like `01 — Treks`), not on every block.
+- Status like "4 seats left" is plain small text, not a coloured chip.
+- Buttons: one primary (green, solid), one quiet (text + underline arrow). Never more
+  than two on screen.
+- Copy is short and human; sign-off "Chaalo."
 
 ## 4. Pages
 
@@ -45,20 +63,24 @@ blog, multi-language, search/filter page (only 3 trips).
    A green highway sign, built in SVG/CSS (not the photo), reading `↑ GVQ`.
    - Load: sign swings in on its wires from above, settles with a damped pendulum sway;
      arrow does a subtle upward nudge every few seconds; small drifting clouds (parallax).
-   - Scroll (pinned): like driving under gantries — the sign text flips/rolls through
-     `↑ GVQ` → `↑ KEDARKANTHA 12,500 FT` → `↑ ANNAPURNA BASE CAMP` → `↑ BHRIGU LAKE`,
-     with the sky tint shifting per destination (winter blue → alpine-glow → lake teal).
-     The final state un-pins into the trips section.
-   - Header: logo left, nav (Treks, Why us, Gallery, Contact), "Book a trek" CTA.
-2. **Upcoming treks:** 3 large poster-style cards (photo, bold name, days, altitude,
-   "from ₹", next batch, seats-left pill). Hover: photo zoom, details slide up.
-3. **Why gv.chaalo:** 4 points — Certified trek leaders; Small batches (max 20);
-   All-inclusive from base city; Kerala crew, travel together. Counters (e.g. 2,000+
-   trekkers, 150+ batches, 4.9★) animate on scroll — illustrative numbers.
-4. **Gallery wall:** Instagram-style masonry with gentle horizontal drift; links to @gv.chaalo.
-5. **Reviews:** 3–4 short testimonials (placeholder names), carousel on mobile.
-6. **CTA band + footer:** "The mountains are calling. Chaalo." Phone 9778 448 026,
-   WhatsApp, Instagram, location: Kerala.
+   - Timing (time-based, no scroll-jacking): `↑ GVQ` holds for the first **4 seconds**,
+     then the text rolls like a passing gantry sign through `↑ KEDARKANTHA` →
+     `↑ ANNAPURNA BC` → `↑ BHRIGU LAKE` (≈3s each), back to `↑ GVQ` (4s), and loops.
+     The sky tint eases with each destination (winter blue → alpine-glow → lake teal).
+     The cycle pauses when the hero is off-screen or the tab is hidden.
+   - Header: logo left; nav (Treks, About, Contact) and one quiet "Book" link.
+2. **01 — Treks:** three full-width editorial rows, alternating photo left/right: large
+   photo, Anton trek name, one-line description, facts as plain text (days · altitude ·
+   season), "from ₹" and next batch in small text, one "View trek →" link.
+3. **02 — About:** one short paragraph in large type about who gv.chaalo is (Kerala crew,
+   small batches of max 20, certified leaders, everything sorted from the base city) with a
+   single tall photo. No icon grid, no counters.
+4. **03 — From the trail:** a calm horizontal strip of 5 photos that drifts slowly; one
+   link to @gv.chaalo.
+5. **Words:** one large pull quote at a time (placeholder text until real reviews), with
+   small prev/next controls.
+6. **Footer CTA:** "The mountains are calling. Chaalo." One button (WhatsApp 9778 448 026),
+   then a minimal footer: Instagram, phone, Kerala.
 
 ### 4.2 Trip detail (`trip.html?id=<slug>`)
 Single template rendered from data. Sections: full-bleed hero with poster title;
@@ -131,6 +153,8 @@ assets/
 ```
 
 - **Libraries (CDN, pinned):** GSAP 3.12.5 + ScrollTrigger, Lenis (smooth scroll).
+- **Visual reference:** `docs/concept/` is the first draft; layout and content still apply,
+  but the Design rules in §3 override its styling (pills, cards, orange, icon grid, stats).
 - **Data flow:** pages read `treks.js` → render; booking steps read/write a single
   `booking` object in `sessionStorage`; confirm page reads it and clears on "Done".
 - **Robustness:** unknown trip slug / missing booking state → friendly redirect to home
