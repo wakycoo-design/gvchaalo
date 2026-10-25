@@ -5,6 +5,28 @@ Pitch-demo website for **gv.chaalo**, a Kerala-based Himalayan trekking company
 
 Front-end only: no backend, no real payments. The booking flow is a clickable mock.
 
+**Live:** https://wakycoo-design.github.io/gvchaalo/
+
+## Run it locally
+
+No build step. From the repo root:
+
+```bash
+python3 -m http.server 8080   # then open http://localhost:8080
+npm test                      # unit tests (Node 22+, no dependencies)
+```
+
+## Site map
+
+| Page | What it does |
+|---|---|
+| `index.html` | Home: animated "↑ GVQ" sign hero (GVQ 4s, then each trek every 3s), treks, about, trail photos, reviews |
+| `trip.html?id=<slug>` | Trek page: facts, altitude chart, day by day, inclusions, FAQ, departures |
+| `book.html?trip=<slug>&date=<YYYY-MM-DD>` | Mock booking: batch → travellers → review → demo payment |
+| `confirm.html` | Confirmation with booking reference and calendar download |
+
+All trek content (prices, dates, itineraries) lives in `assets/js/data/treks.js`.
+
 ## What's here
 
 | Path | What it is |
