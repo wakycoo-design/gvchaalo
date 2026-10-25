@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book — gv.chaalo</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#F7F9FB">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/book.css">
+</head>
+<body class="page-solid page-book">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header is-solid" data-header>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="gv.chaalo home">
+        <svg class="brand__mark" viewBox="0 0 44 28" aria-hidden="true"><path d="M2 26 L14 10 L20 17 L28 3 L42 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M24.6 9 L28 3 L31.4 9 L29.4 7.8 L27.2 10 Z" fill="currentColor"/></svg>
+        <span class="brand__word">gv.chaalo</span>
+      </a>
+      <p class="checkout-note"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Secure checkout <span class="muted">· demo</span></p>
+      <a class="link-arrow link-arrow--back checkout-exit" href="index.html" data-exit>Back to trek</a>
+    </div>
+  </header>
+
+  <main id="main" class="container book">
+    <ol class="progress" data-progress aria-label="Booking steps"></ol>
+    <div class="grid book__grid">
+      <form class="book__main" data-book novalidate onsubmit="return false"></form>
+      <aside class="book__summary" aria-label="Booking summary">
+        <div class="sum" data-summary></div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="pay" data-pay hidden>
+    <div class="pay__panel" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+      <div class="pay__head">
+        <div>
+          <p class="label" id="pay-title">Paying gv.chaalo</p>
+          <p class="pay__amount" data-pay-amount></p>
+        </div>
+        <button type="button" class="icon-btn" data-pay-close aria-label="Close payment"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="pay__tabs" role="tablist" aria-label="Payment method">
+        <button type="button" role="tab" data-tab="upi" id="tab-upi" aria-controls="panel-upi">UPI</button>
+        <button type="button" role="tab" data-tab="card" id="tab-card" aria-controls="panel-card">Card</button>
+        <button type="button" role="tab" data-tab="bank" id="tab-bank" aria-controls="panel-bank">Netbanking</button>
+      </div>
+      <div class="pay__body">
+        <div role="tabpanel" id="panel-upi" data-panel="upi" aria-labelledby="tab-upi">
+          <div class="pay__upi">
+            <svg class="pay__qr" viewBox="0 0 21 21" aria-hidden="true" shape-rendering="crispEdges"><path d="M0 0h7v7H0zM14 0h7v7h-7zM0 14h7v7H0z" fill="none" stroke="currentColor"/><path d="M2 2h3v3H2zM16 2h3v3h-3zM2 16h3v3H2zM9 1h1v2H9zM11 3h2v1h-2zM9 5h2v2H9zM8 8h3v1H8zM12 8h1v3h-1zM14 9h2v1h-2zM17 8h3v2h-3zM9 11h2v2H9zM14 12h1v2h-1zM16 11h2v1h-2zM19 12h1v3h-1zM9 14h1v3H9zM11 15h3v1h-3zM15 16h2v2h-2zM18 17h2v1h-2zM11 18h2v2h-2zM14 19h1v1h-1zM1 9h3v1H1zM5 10h2v2H5zM2 12h2v1H2z"/></svg>
+            <p class="muted">Scan with GPay, PhonePe or Paytm, or enter your UPI ID.</p>
+          </div>
+          <label class="field"><span class="field__label">UPI ID</span><input placeholder="name@okaxis" autocomplete="off"></label>
+        </div>
+        <div role="tabpanel" id="panel-card" data-panel="card" aria-labelledby="tab-card" hidden>
+          <label class="field"><span class="field__label">Card number</span><input inputmode="numeric" placeholder="4111 1111 1111 1111" autocomplete="off"></label>
+          <div class="form-grid">
+            <label class="field"><span class="field__label">Expiry</span><input placeholder="MM / YY" autocomplete="off"></label>
+            <label class="field"><span class="field__label">CVV</span><input inputmode="numeric" placeholder="•••" autocomplete="off"></label>
+          </div>
+        </div>
+        <div role="tabpanel" id="panel-bank" data-panel="bank" aria-labelledby="tab-bank" hidden>
+          <div class="banks">
+            <button type="button">SBI</button>
+            <button type="button">HDFC</button>
+            <button type="button">Federal Bank</button>
+            <button type="button">South Indian Bank</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn--block pay__btn" data-pay-btn>Pay</button>
+        <p class="pay__demo">Demo only — no money is charged.</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/book.js"></script>
+</body>
+</html>
