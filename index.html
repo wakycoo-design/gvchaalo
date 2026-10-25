@@ -47,12 +47,11 @@
 
   <main id="main">
     <section class="hero" aria-label="Introduction" data-hero>
-      <div class="hero__sky" data-sky></div>
-      <div class="hero__clouds" aria-hidden="true">
-        <span class="cloud cloud--a"></span>
-        <span class="cloud cloud--b"></span>
-        <span class="cloud cloud--c"></span>
+      <div class="hero__media" data-hero-media aria-hidden="true">
+        <img class="hero__img" src="assets/img/hero-gvq.jpg" width="2200" height="1467" alt="" fetchpriority="high" decoding="async">
       </div>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__grain" aria-hidden="true"></div>
       <svg class="hero__wires" viewBox="0 0 1440 900" preserveAspectRatio="none" aria-hidden="true">
         <path d="M-20 214 Q720 246 1460 206" vector-effect="non-scaling-stroke"/>
       </svg>
@@ -81,10 +80,16 @@
         <p class="label hero__label">Himalayan treks · from Kerala</p>
         <h1 class="hero__title">Small groups. Big mountains. <br>Everything sorted from the base city.</h1>
         <div class="hero__actions">
-          <a class="btn" href="#treks">Explore treks</a>
+          <a class="btn btn--light" href="#treks">Explore treks</a>
           <a class="link-arrow" href="https://wa.me/919778448026">WhatsApp us</a>
         </div>
       </div>
+
+      <a class="hero__index" href="#treks" data-hero-index>
+        <span class="hero__index-num" data-idx>01 / 04</span>
+        <span class="hero__index-bar" aria-hidden="true"><i data-idx-bar></i></span>
+        <span class="hero__index-name" data-idx-name>gv.chaalo</span>
+      </a>
     </section>
 
     <section class="section treks" id="treks" aria-labelledby="treks-title">

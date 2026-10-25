@@ -1,5 +1,5 @@
-/* Hero: blue sky, overhead wires and the "↑ GVQ" highway sign.
-   Everything here renders statically; hero-sign.js only adds motion. */
+/* Hero: full-bleed photograph, an overhead wire and the "↑ GVQ" highway sign.
+   Everything here renders statically; hero-sign.js adds motion and the photo cycle. */
 
 .hero {
   position: relative;
@@ -9,43 +9,41 @@
   max-height: 1100px;
   overflow: hidden;
   isolation: isolate;
+  background: #121A16;
+  color: var(--white);
 }
 
-.hero__sky {
-  --sky-top: #2268BA;
-  --sky-mid: #4D96DE;
-  --sky-bottom: #CFE4F6;
-  position: absolute; inset: 0; z-index: -2;
-  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 50%, var(--sky-bottom) 100%);
+/* Photographs. One shared grade so stock from different shoots reads as one series. */
+.hero__media { position: absolute; left: 0; right: 0; top: -6%; bottom: -6%; z-index: -3; }
+.hero__img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center 42%;
+  opacity: 0;
+  filter: saturate(0.82) contrast(1.04) brightness(0.9);
+  transform-origin: 50% 40%;
+  will-change: opacity, transform;
+}
+.hero__img:first-child { opacity: 1; }
+
+.hero__shade {
+  position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8, 12, 10, 0.42) 0%, rgba(8, 12, 10, 0) 24%),
+    linear-gradient(0deg, rgba(8, 12, 10, 0.66) 0%, rgba(8, 12, 10, 0.18) 34%, rgba(8, 12, 10, 0) 56%);
 }
 
-.hero::after {
-  content: '';
-  position: absolute; left: 0; right: 0; bottom: 0; height: 140px; z-index: -1;
-  background: linear-gradient(180deg, rgba(247, 249, 251, 0), var(--snow));
-  pointer-events: none;
+/* Fine film grain over everything except the sign. */
+.hero__grain {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  opacity: 0.16; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Clouds */
-.hero__clouds { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.cloud {
-  position: absolute; display: block;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.55);
-  filter: blur(22px);
-  animation: cloud-drift 38s ease-in-out infinite alternate;
-}
-.cloud--a { width: 34vw; height: 7vw; min-height: 48px; top: 36%; left: -6vw; }
-.cloud--b { width: 26vw; height: 5vw; min-height: 36px; top: 12%; right: -4vw; opacity: .7; animation-duration: 46s; animation-direction: alternate-reverse; }
-.cloud--c { width: 22vw; height: 4.5vw; min-height: 32px; top: 58%; right: 14vw; opacity: .6; animation-duration: 52s; }
-@keyframes cloud-drift { from { transform: translateX(-4vw); } to { transform: translateX(6vw); } }
-
-/* Wires */
+/* Wire */
 .hero__wires { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-.hero__wires path { fill: none; stroke: rgba(15, 26, 20, 0.82); stroke-width: 1.5; }
-.hero__wires .hero__wire--far { stroke: rgba(15, 26, 20, 0.35); stroke-width: 1; }
+.hero__wires path { fill: none; stroke: rgba(10, 14, 12, 0.88); stroke-width: 1.6; }
 
-/* Sign. The stage's top sits on the upper wire at the centre of the curve (≈25.3% of the hero). */
+/* Sign. The stage's top sits on the wire at the centre of the curve (≈25.3% of the hero). */
 .sign-stage {
   position: absolute; left: 0; right: 0; top: 25.3%; z-index: 1;
   display: flex; justify-content: center;
@@ -59,9 +57,10 @@
 }
 .js .sign { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .js .sign { opacity: 1; } }
+
 .sign__hanger {
   position: absolute; top: -4px; width: 8px; height: 30px;
-  background: #3A4642; border-radius: 1px;
+  background: #2E3834; border-radius: 1px;
 }
 .sign__hanger--l { left: 22%; }
 .sign__hanger--r { right: 22%; }
@@ -79,7 +78,7 @@
     inset 0 0 0 4px var(--green),
     inset 0 0 0 6px #E4EAE6,
     0 1px 0 rgba(255, 255, 255, 0.15),
-    0 34px 60px -24px rgba(8, 30, 60, 0.45);
+    0 40px 70px -28px rgba(0, 0, 0, 0.6);
 }
 .sign__bolt {
   position: absolute; width: 6px; height: 6px; border-radius: 50%;
@@ -121,16 +120,39 @@
   position: absolute; left: 0; right: 0; bottom: clamp(48px, 9vh, 96px); z-index: 1;
   margin-inline: auto;
 }
-.hero__label { color: #2F4A5E; }
+.hero__label { color: rgba(255, 255, 255, 0.78); }
 .hero__title {
   margin-top: 16px;
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 500;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  color: var(--ink);
+  color: var(--white);
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 0.18);
 }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin-top: 32px; }
+.hero .link-arrow { color: var(--white); }
+
+.btn--light { background: var(--white); color: var(--ink); }
+.btn--light:hover { background: var(--snow); }
+
+/* Index: which sign is up, with a hairline that fills while it holds. */
+.hero__index {
+  position: absolute; z-index: 1;
+  right: max(var(--gutter), calc((100vw - 1360px) / 2 + var(--gutter)));
+  bottom: clamp(48px, 9vh, 96px);
+  display: grid; grid-template-columns: auto 120px; align-items: center; column-gap: 16px; row-gap: 10px;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: var(--fs-12);
+}
+.hero__index-num { font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
+.hero__index-bar { position: relative; height: 1px; background: rgba(255, 255, 255, 0.28); overflow: hidden; }
+.hero__index-bar i { position: absolute; inset: 0; background: var(--white); transform: scaleX(0); transform-origin: left; }
+.hero__index-name { grid-column: 1 / -1; font-size: var(--fs-14); font-weight: 500; color: var(--white); }
+.hero__index-name::after { content: ' →'; transition: margin .4s var(--ease); }
+.hero__index:hover .hero__index-name::after { margin-left: 4px; }
+
+@media (max-width: 900px) { .hero__index { display: none; } }
 
 @media (max-width: 600px) {
   .sign-stage { top: 23%; }
