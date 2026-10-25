@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trek — gv.chaalo</title>
+  <meta name="description" content="Himalayan trek with gv.chaalo: itinerary, altitude, inclusions and departure dates.">
+  <meta name="theme-color" content="#F7F9FB">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body class="page-solid page-trip">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header is-solid" data-header>
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="gv.chaalo home">
+        <svg class="brand__mark" viewBox="0 0 44 28" aria-hidden="true"><path d="M2 26 L14 10 L20 17 L28 3 L42 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M24.6 9 L28 3 L31.4 9 L29.4 7.8 L27.2 10 Z" fill="currentColor"/></svg>
+        <span class="brand__word">gv.chaalo</span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="index.html#treks">Treks</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+        <a class="site-nav__book" href="#" data-trip-book>Book</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>Menu</button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" hidden data-menu>
+    <nav class="container menu__nav" aria-label="Mobile">
+      <a href="index.html#treks">Treks</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="#" data-trip-book>Book this trek</a>
+    </nav>
+    <p class="container menu__foot">+91 97784 48026 · Kerala</p>
+  </div>
+
+  <main id="main">
+    <section class="trip-head container">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="index.html#treks">Treks</a> <span aria-hidden="true">/</span> <span data-trip-crumb></span></nav>
+      <p class="label trip-head__kind" data-trip-kind></p>
+      <h1 class="display trip-head__title" data-trip-title></h1>
+      <p class="trip-head__tagline" data-trip-tagline></p>
+      <dl class="trip-facts" data-trip-facts></dl>
+    </section>
+
+    <figure class="trip-photo" data-reveal-img>
+      <img data-trip-img src="" width="1400" height="933" alt="" fetchpriority="high">
+    </figure>
+
+    <div class="container grid trip-body">
+      <div class="trip-main">
+        <section class="trip-block" aria-labelledby="t-overview">
+          <h2 class="label" id="t-overview">Overview</h2>
+          <p class="trip-lede" data-trip-overview></p>
+        </section>
+
+        <section class="trip-block" aria-labelledby="t-alt">
+          <h2 class="label" id="t-alt">Altitude</h2>
+          <div class="trip-alt" data-trip-alt></div>
+        </section>
+
+        <section class="trip-block" aria-labelledby="t-days">
+          <h2 class="label" id="t-days">Day by day</h2>
+          <ol class="days" data-trip-days></ol>
+        </section>
+
+        <section class="trip-block" aria-labelledby="t-incl">
+          <h2 class="label" id="t-incl">What's included</h2>
+          <div class="incl">
+            <div>
+              <h3 class="incl__head">Included</h3>
+              <ul class="plain-list" data-trip-in></ul>
+            </div>
+            <div>
+              <h3 class="incl__head">Not included</h3>
+              <ul class="plain-list plain-list--muted" data-trip-out></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="trip-block" aria-labelledby="t-carry">
+          <h2 class="label" id="t-carry">Pack list</h2>
+          <ul class="plain-list" data-trip-carry></ul>
+        </section>
+
+        <section class="trip-block" aria-labelledby="t-faq">
+          <h2 class="label" id="t-faq">Questions</h2>
+          <div class="faqs" data-trip-faq></div>
+        </section>
+      </div>
+
+      <aside class="trip-aside" id="dates" aria-labelledby="t-dates">
+        <div class="trip-aside__inner">
+          <p class="label" id="t-dates">Departures</p>
+          <p class="trip-aside__price"><span data-trip-price></span> <span class="muted">per person + 5% GST</span></p>
+          <ul class="deps" data-trip-deps></ul>
+          <button type="button" class="link-arrow deps__more" data-trip-more aria-expanded="false" aria-controls="dates" hidden>Show all dates</button>
+          <a class="btn btn--block trip-aside__book" href="#" data-trip-book>Book this trek</a>
+          <a class="link-arrow trip-aside__ask" href="https://wa.me/919778448026">Ask a trek lead on WhatsApp</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="book-bar" aria-label="Book this trek">
+    <p><span class="muted">From</span> <strong data-trip-from></strong></p>
+    <a class="btn" href="#" data-trip-book>Book now</a>
+  </div>
+
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-cta" data-reveal>
+        <p class="footer-cta__title display">The mountains<br>are calling.</p>
+        <p class="footer-cta__sign display">Chaalo.</p>
+        <a class="btn" href="https://wa.me/919778448026">WhatsApp 97784 48026</a>
+      </div>
+      <div class="footer-bar">
+        <a class="brand" href="index.html" aria-label="gv.chaalo home">
+          <svg class="brand__mark" viewBox="0 0 44 28" aria-hidden="true"><path d="M2 26 L14 10 L20 17 L28 3 L42 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M24.6 9 L28 3 L31.4 9 L29.4 7.8 L27.2 10 Z" fill="currentColor"/></svg>
+          <span class="brand__word">gv.chaalo</span>
+        </a>
+        <ul class="footer-bar__links">
+          <li><a href="https://www.instagram.com/gv.chaalo">Instagram</a></li>
+          <li><a href="tel:+919778448026">+91 97784 48026</a></li>
+          <li>[Second number]</li>
+          <li>Kerala, India</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script type="module" src="assets/js/trip.js"></script>
+</body>
+</html>
