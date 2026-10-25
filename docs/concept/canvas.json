@@ -1,0 +1,21 @@
+{
+  "v": 3,
+  "createdOnFiles": {"at": "2026-10-25T10:43:35.419Z", "v": 1},
+  "attachments": {},
+  "title": "gv.chaalo Website Concept",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 4300, "title": "1 · Home page", "expand": "fill"},
+    "Trek.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 3500, "title": "2 · Trek page — Kedarkantha", "expand": "fill"},
+    "Booking.dc.html": {"x": 3040, "y": 0, "w": 1280, "h": 980, "title": "3 · Booking flow (clickable demo)", "expand": "fill", "is_interactive": true},
+    "Mobile.dc.html": {"x": 4400, "y": 0, "w": 390, "h": 844, "title": "4 · Home on phone"}
+  },
+  "order": ["Main.dc.html", "Trek.dc.html", "Booking.dc.html", "Mobile.dc.html"],
+  "notes": {
+    "heading": {"x": 0, "y": -320, "text": "gv.chaalo — website concept · prototype plan", "kind": "title1", "maxW": 4790},
+    "bookingNote": {"x": 3040, "y": 1100, "w": 560, "text": "Press Play on the booking board and click through: pick a batch → travellers → review → pay (demo, no money moves) → confirmation.", "color": "blue", "size": "m"},
+    "mobileNote": {"x": 4400, "y": 964, "w": 390, "text": "Same site on a phone: the sign sits on top, treks stack, a sticky Book bar stays at the bottom.", "color": "green", "size": "m"}
+  },
+  "designSystems": []
+}
