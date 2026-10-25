@@ -78,8 +78,10 @@ async function init() {
   document.getElementById('trek-rows').innerHTML = TREKS.map(renderTrekRow).join('');
   initStrip();
   initQuotes();
-  const { initUI } = await import('./ui.js');
+  const [{ initUI }, { initHeroSign, heroMessages }] = await Promise.all([import('./ui.js'), import('./hero-sign.js')]);
   initUI();
+  const stage = document.getElementById('sign-stage');
+  if (stage) initHeroSign(stage, heroMessages(TREKS));
 }
 
 if (typeof document !== 'undefined') init();
