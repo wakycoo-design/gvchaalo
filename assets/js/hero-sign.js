@@ -2,7 +2,7 @@
 // each trek like gantry signs passing overhead while the photograph behind it
 // crossfades to that trek. Time-based, never scroll-jacked.
 
-export const HOLD_FIRST_MS = 4000;
+export const HOLD_FIRST_MS = 8000;
 export const HOLD_MS = 5500;
 
 // Changes are meant to be felt more than seen: long holds, slow dissolves.
@@ -105,7 +105,7 @@ export function initHeroSign(stage, messages) {
     if (!running) { timer.pause(); barTween?.pause(); }
   }
 
-  // GVQ's 4 seconds count from the moment the sign appears, swing included.
+  // GVQ's hold counts from the moment the sign appears, swing included.
   const intro = gsap.timeline({ onStart: schedule, onComplete: startSway, delay: 0.25 });
   intro
     .set(sign, { opacity: 1 })

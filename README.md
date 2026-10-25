@@ -20,7 +20,7 @@ npm test                      # unit tests (Node 22+, no dependencies)
 
 | Page | What it does |
 |---|---|
-| `index.html` | Home: animated "↑ GVQ" sign hero (GVQ 4s, then each trek every 3s), treks, about, trail photos, reviews |
+| `index.html` | Home: animated "↑ GVQ" sign hero (GVQ 8s, then each trek every 5.5s), treks, about, trail photos, reviews |
 | `trip.html?id=<slug>` | Trek page: facts, altitude chart, day by day, inclusions, FAQ, departures |
 | `book.html?trip=<slug>&date=<YYYY-MM-DD>` | Mock booking: batch → travellers → review → demo payment |
 | `confirm.html` | Confirmation with booking reference and calendar download |
