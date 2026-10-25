@@ -105,7 +105,31 @@ function initFab() {
   window.addEventListener('scroll', update, { passive: true });
 }
 
+// Footer extras: placeholder links say so instead of jumping to the top, and the
+// newsletter form is a demo that sends nothing.
+function initFooter() {
+  const toast = document.querySelector('[data-toast]');
+  let timer;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-soon]');
+    if (!a) return;
+    e.preventDefault();
+    if (!toast) return;
+    toast.textContent = 'This page comes with the full site.';
+    toast.classList.add('is-on');
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove('is-on'), 2200);
+  });
+  const form = document.querySelector('[data-signup]');
+  form?.addEventListener('submit', e => {
+    e.preventDefault();
+    form.querySelector('.signup__row').hidden = true;
+    form.querySelector('[data-signup-done]').hidden = false;
+  });
+}
+
 export function initUI() {
+  initFooter();
   initSmoothScroll();
   initAnchors();
   initHeader();

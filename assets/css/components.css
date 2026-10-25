@@ -116,14 +116,71 @@ body.menu-open .site-header { color: var(--ink); background: transparent; box-sh
 .footer-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 28px; padding-bottom: var(--section); }
 .footer-cta__title { font-size: var(--fs-96); }
 .footer-cta__sign { font-size: var(--fs-96); color: var(--green); margin-top: -12px; }
-.footer-bar {
-  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
-  padding-block: 32px; border-top: 1px solid var(--hairline);
-  font-size: var(--fs-14); color: var(--muted);
+.footer-main {
+  --f-text: #B7C2BC;
+  --f-dim: #7F8D86;
+  --f-line: #24332B;
+  background: var(--ink); color: var(--f-text);
+  padding-top: clamp(72px, 9vw, 128px);
+  overflow: hidden;
 }
-.footer-bar .brand { color: var(--ink); }
-.footer-bar__links { display: flex; flex-wrap: wrap; gap: 8px 28px; }
-.footer-bar__links a:hover { color: var(--ink); }
+.footer-main a { transition: color .3s var(--ease); }
+.footer-main a:hover { color: var(--white); }
+.footer-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 64px; }
+.footer-brand { grid-column: 1 / span 4; }
+.footer-links { grid-column: 6 / span 7; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px var(--gutter); }
+.footer-brand .brand { color: var(--white); }
+.footer-brand__line { margin-top: 20px; max-width: 34ch; font-size: var(--fs-14); line-height: 1.7; }
+.footer-head { display: block; margin-bottom: 18px; font-size: var(--fs-12); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--f-dim); }
+.footer-links ul { display: grid; gap: 12px; font-size: var(--fs-14); }
+.soon { margin-left: 6px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--f-dim); }
+
+.signup { margin-top: 48px; }
+.signup__hint { font-size: var(--fs-14); margin-top: -8px; }
+.signup__row { display: flex; margin-top: 16px; border-bottom: 1px solid #4A5A52; transition: border-color .3s var(--ease); }
+.signup__row:focus-within { border-color: var(--white); }
+.signup__row[hidden] { display: none; }
+.signup__row input { flex: 1 1 auto; min-width: 0; height: 48px; padding: 0; border: 0; background: transparent; color: var(--white); font-size: var(--fs-16); }
+.signup__row input::placeholder { color: var(--f-dim); }
+.signup__row input:focus { outline: none; }
+.signup__row button { width: 48px; height: 48px; color: var(--white); font-size: var(--fs-20); transition: transform .4s var(--ease); }
+.signup__row button:hover { transform: translateX(4px); }
+.signup__done { margin-top: 14px; font-size: var(--fs-14); color: var(--white); }
+.footer-contact { margin-top: 40px; display: grid; gap: 8px; font-size: var(--fs-14); }
+
+.footer-word {
+  margin: clamp(80px, 10vw, 140px) 0 0;
+  padding-inline: var(--gutter);
+  font-weight: 600; font-size: clamp(5rem, 21.5vw, 22rem); line-height: 0.78; letter-spacing: -0.065em;
+  color: #17261E; white-space: nowrap; text-align: center;
+  user-select: none;
+}
+.footer-base {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px;
+  padding-block: 28px 32px; border-top: 1px solid var(--f-line);
+  font-size: var(--fs-12); color: var(--f-dim);
+}
+.footer-social { display: flex; gap: 24px; }
+.footer-top { color: var(--f-text); }
+
+@media (max-width: 1000px) {
+  .footer-brand, .footer-links { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .footer-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 16px; }
+  .footer-base { flex-direction: column; align-items: flex-start; }
+}
+
+/* ---------- Toast for links that open in the full build ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 96px; z-index: 70;
+  padding: 12px 18px; background: var(--white); color: var(--ink);
+  font-size: var(--fs-14); border-radius: 2px;
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, .35);
+  transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+  transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+.toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
 /* ---------- Reveal on scroll ---------- */
 .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
