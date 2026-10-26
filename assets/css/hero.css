@@ -155,7 +155,27 @@
 @media (max-width: 900px) { .hero__index { display: none; } }
 
 @media (max-width: 600px) {
-  .sign-stage { top: 23%; }
-  .sign__plate { width: min(90vw, 380px); --win-h: 64px; }
+  .hero { min-height: 560px; }
+  .sign-stage { top: 22.5%; }
+  .sign { padding-top: 14px; }
+  .sign__hanger { width: 6px; height: 22px; }
+  .sign__plate {
+    --win-h: 46px;
+    width: min(74vw, 290px);
+    gap: 12px;
+    padding: 11px 16px 11px 14px;
+    border-radius: 7px;
+    box-shadow: inset 0 0 0 3px var(--green), inset 0 0 0 4.5px #E4EAE6, 0 24px 40px -20px rgba(0, 0, 0, 0.55);
+  }
+  .sign__arrow { width: 24px; }
+  .sign__sub { font-size: 8px; letter-spacing: 0.18em; }
+  .sign__bolt { width: 4px; height: 4px; }
+  .sign__bolt--tl, .sign__bolt--tr { top: 8px; }
+  .sign__bolt--bl, .sign__bolt--br { bottom: 8px; }
+  .sign__bolt--tl, .sign__bolt--bl { left: 8px; }
+  .sign__bolt--tr, .sign__bolt--br { right: 8px; }
+  .hero__copy { bottom: 40px; }
+  .hero__title { font-size: 1.375rem; line-height: 1.22; }
   .hero__title br { display: none; }
+  .hero__actions { margin-top: 24px; gap: 8px 24px; }
 }

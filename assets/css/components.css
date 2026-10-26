@@ -110,7 +110,11 @@ body.menu-open .site-header { color: var(--ink); background: transparent; box-sh
 .fab.is-visible { opacity: 1; transform: none; pointer-events: auto; }
 .fab:hover { border-color: var(--ink); }
 .fab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
-@media (max-width: 600px) { .fab { right: 16px; bottom: 16px; } }
+@media (max-width: 600px) {
+  .fab { right: 14px; bottom: 14px; width: 46px; height: 46px; box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.3); }
+  .fab svg { width: 20px; height: 20px; }
+  .btn { min-height: 48px; padding: 0 22px; }
+}
 
 /* ---------- Footer ---------- */
 .site-footer { padding-top: var(--section); background: var(--snow); }
