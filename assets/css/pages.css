@@ -91,10 +91,22 @@
 .trail__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
 .trail__head .section-title { margin-top: 18px; }
 .trail__strip { margin-top: clamp(48px, 6vw, 80px); overflow: hidden; }
-.trail__track { display: flex; gap: 16px; width: max-content; animation: strip 70s linear infinite; }
+.trail__track { display: flex; gap: 16px; width: max-content; animation: strip 58s linear infinite; }
 .trail__strip:hover .trail__track { animation-play-state: paused; }
 .trail__track img { height: clamp(240px, 30vw, 440px); width: auto; object-fit: cover; }
 @keyframes strip { to { transform: translateX(calc(-50% - 8px)); } }
+/* Phones and tablets: a swipeable row instead of the automatic drift. */
+@media (max-width: 1000px) {
+  .trail__strip {
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .trail__strip::-webkit-scrollbar { display: none; }
+  .trail__track { animation: none; gap: 12px; }
+  .trail__track img { height: clamp(220px, 62vw, 360px); scroll-snap-align: start; border-radius: 4px; }
+  .trail__track img[aria-hidden="true"] { display: none; }
+}
 
 /* ---------- Home: reviews ---------- */
 .reviews__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px 48px; margin-bottom: clamp(48px, 6vw, 80px); }
