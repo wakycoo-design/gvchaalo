@@ -12,7 +12,7 @@
 /* ---------- Home: swipeable trek cards ---------- */
 .treks { padding-top: calc(var(--section) * 0.75); padding-bottom: clamp(48px, 6vw, 80px); }
 .about { padding-top: 0; }
-@media (min-width: 901px) { .about { padding-bottom: calc(var(--section) * 1.4); } }
+@media (min-width: 901px) { .about { padding-bottom: calc(var(--section) * 2); } }
 .section-sub { margin-top: 4px; font-size: 1.0625rem; color: var(--muted); }
 
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
