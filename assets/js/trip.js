@@ -61,7 +61,7 @@ const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 function renderTrip(trek) {
   const open = firstOpenDeparture(trek);
   const bookUrl = open ? `book.html?trip=${trek.slug}&date=${open.id}` : 'https://wa.me/919778448026';
-  document.title = `${trek.name} — gv.chaalo`;
+  document.title = `${trek.name} · gv.chaalo`;
   const set = (sel, html) => { const el = document.querySelector(sel); if (el) el.innerHTML = html; };
 
   set('[data-trip-crumb]', esc(trek.name));

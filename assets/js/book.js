@@ -75,7 +75,7 @@ function init() {
   };
 
   document.querySelectorAll('[data-exit]').forEach(a => { a.href = `trip.html?id=${trek.slug}`; });
-  document.title = `Book ${trek.name} — gv.chaalo`;
+  document.title = `Book ${trek.name} · gv.chaalo`;
 
   function renderProgress() {
     progress.innerHTML = STEPS.map((s, i) => {

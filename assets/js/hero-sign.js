@@ -158,12 +158,9 @@ export function initHeroSign(stage, messages) {
 
   window.addEventListener('resize', () => fitTitle(current, win));
 
-  // Gentle depth on scroll: photo and sign drift at different speeds, the copy fades.
-  if (window.ScrollTrigger && hero) {
+  // Gentle depth on scroll: only the photograph drifts. Sign and copy stay put and crisp.
+  if (window.ScrollTrigger && hero && media) {
     gsap.registerPlugin(window.ScrollTrigger);
-    const st = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
-    gsap.to(stage, { yPercent: -18, ease: 'none', scrollTrigger: st });
-    if (media) gsap.to(media, { yPercent: 12, ease: 'none', scrollTrigger: st });
-    gsap.to(hero.querySelector('.hero__copy'), { opacity: 0, y: -40, ease: 'none', scrollTrigger: { ...st, end: '60% top' } });
+    gsap.to(media, { yPercent: 10, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
   }
 }

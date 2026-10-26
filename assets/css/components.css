@@ -75,6 +75,7 @@ body.menu-open .site-header { color: var(--ink); background: transparent; box-sh
 .btn:hover { background: var(--green-deep); }
 .btn[disabled], .btn[aria-disabled="true"] { background: #9AA59F; cursor: not-allowed; }
 .btn--block { width: 100%; }
+.btn--sm { min-height: 46px; padding: 0 22px; font-size: var(--fs-14); }
 
 .link-arrow {
   display: inline-flex; align-items: center; gap: 10px;
