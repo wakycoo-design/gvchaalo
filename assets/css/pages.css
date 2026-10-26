@@ -87,6 +87,41 @@
   .about__text { grid-column: 1 / -1; margin-top: 48px; }
 }
 
+.about__team { margin-top: 28px; }
+
+/* ---------- Our Team ---------- */
+.team-head { padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(40px, 5vw, 72px); }
+.team-head__title { margin-top: 18px; font-size: var(--fs-hero); }
+
+.team-lead { align-items: end; }
+.team-lead__media { grid-column: 1 / span 6; overflow: hidden; aspect-ratio: 1166 / 1600; background: #DCE3DF; }
+.team-lead__media img { width: 100%; height: 100%; object-fit: cover; }
+.team-lead__text { grid-column: 8 / span 5; padding-bottom: 8px; }
+.team-lead__name { margin-top: 14px; font-size: var(--fs-96); color: var(--green); }
+.team-lead__lede {
+  margin-top: 28px;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+}
+.team-lead__lede--quiet { color: var(--muted); margin-top: 20px; }
+.team-lead__ask { margin-top: 32px; }
+
+.team-trail { margin-top: clamp(72px, 10vw, 160px); row-gap: 48px; }
+.team-trail__item img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; background: #DCE3DF; }
+.team-trail__item figcaption { margin-top: 14px; }
+.team-trail__item--a { grid-column: 2 / span 5; }
+.team-trail__item--b { grid-column: 8 / span 5; margin-top: clamp(64px, 12vw, 200px); }
+
+.team-cta { padding-block: clamp(96px, 12vw, 180px); text-align: center; }
+.team-cta__title { font-size: var(--fs-96); margin-bottom: 36px; }
+
+@media (max-width: 900px) {
+  .team-lead__media, .team-lead__text { grid-column: 1 / -1; }
+  .team-lead__text { margin-top: 40px; }
+  .team-trail__item--a, .team-trail__item--b { grid-column: 1 / -1; margin-top: 0; }
+}
+
 /* ---------- Home: trail strip ---------- */
 .trail__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; }
 .trail__head .section-title { margin-top: 18px; }
