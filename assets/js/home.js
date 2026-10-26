@@ -35,40 +35,68 @@ export function nextDeparture(trek) {
   return trek.departures.find(d => d.seatsLeft > 0);
 }
 
-export function renderTrekRow(trek, index) {
+const ICON = {
+  days: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="1.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
+  alt: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 20 9 9l4 6 3-4 5.5 9z"/></svg>',
+  pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>'
+};
+
+// Poster-style card for the swipeable treks row.
+export function renderTrekCard(trek) {
   const next = nextDeparture(trek);
   const url = `trip.html?id=${trek.slug}`;
   const withYear = next?.tag === 'Early bird';
-  const nextLine = next
-    ? `Next batch <strong>${formatDate(next.startISO, { withYear })}</strong>` +
-      (next.seatsLeft <= 4 ? ` · ${next.seatsLeft} seats left` : '')
-    : 'All batches are full. <a href="https://wa.me/919778448026">Join the waitlist</a>';
+  const status = !next
+    ? 'All batches full'
+    : next.seatsLeft <= 4
+      ? `${next.seatsLeft} seats left · ${formatDate(next.startISO, { withYear })}`
+      : `Next batch · ${formatDate(next.startISO, { withYear })}`;
   const book = next
-    ? `<a class="btn btn--sm" href="book.html?trip=${trek.slug}&amp;date=${next.id}">Book now</a>`
-    : '';
+    ? `<a class="btn btn--light btn--sm" href="book.html?trip=${trek.slug}&amp;date=${next.id}">Book now</a>`
+    : `<a class="btn btn--light btn--sm" href="https://wa.me/919778448026">Join waitlist</a>`;
 
   return `
-    <article class="trek-row${index % 2 ? ' trek-row--flip' : ''}">
-      <a class="trek-row__media" href="${url}" tabindex="-1" aria-hidden="true" data-reveal-img>
-        <img src="${trek.cardImg}" width="1400" height="933" loading="lazy" alt="">
-      </a>
-      <div class="trek-row__body" data-reveal>
-        <p class="label">${trek.kind} · ${trek.start}</p>
-        <h3 class="trek-row__name"><a href="${url}">${trek.posterName}</a></h3>
-        <p class="trek-row__tagline">${trek.tagline}</p>
-        <dl class="facts">
-          <div><dt>Duration</dt><dd>${trek.days} days</dd></div>
-          <div><dt>Max altitude</dt><dd>${trek.maxAltitudeFt.toLocaleString('en-IN')} ft</dd></div>
-          <div><dt>Season</dt><dd>${trek.season}</dd></div>
-          <div><dt>From</dt><dd>${formatINR(trek.priceFrom)}</dd></div>
-        </dl>
-        <p class="trek-row__next">${nextLine}</p>
-        <div class="trek-row__actions">
+    <article class="tcard">
+      <img class="tcard__img" src="${trek.cardImg}" width="1400" height="933" loading="lazy" alt="${trek.imgAlt}">
+      <span class="tcard__badge">${trek.badge}</span>
+      <div class="tcard__poster" aria-hidden="true">
+        <span class="tcard__poster-name">${trek.posterName}</span>
+        <span class="tcard__poster-sub">${trek.start} to ${trek.end}</span>
+      </div>
+      <div class="tcard__body">
+        <span class="tcard__status">${status}</span>
+        <h3 class="tcard__name"><a class="tcard__link" href="${url}">${trek.name}</a></h3>
+        <ul class="tcard__meta">
+          <li>${ICON.days}${trek.days} Days</li>
+          <li>${ICON.alt}${trek.maxAltitudeFt.toLocaleString('en-IN')} ft</li>
+          <li>${ICON.pin}${trek.start}</li>
+        </ul>
+        <div class="tcard__foot">
+          <p class="tcard__price">From <strong>${formatINR(trek.priceFrom)}</strong> pp</p>
           ${book}
-          <a class="link-arrow" href="${url}">View trek</a>
         </div>
       </div>
     </article>`;
+}
+
+function initCarousel() {
+  const track = document.querySelector('[data-cards]');
+  const dots = document.querySelector('[data-card-dots]');
+  if (!track || !dots) return;
+  const cards = [...track.children];
+  dots.innerHTML = cards.map((c, i) => `<button type="button" aria-label="Show trek ${i + 1} of ${cards.length}"></button>`).join('');
+  const buttons = [...dots.children];
+  const setActive = i => buttons.forEach((b, j) => b.setAttribute('aria-current', String(i === j)));
+  setActive(0);
+  buttons.forEach((b, i) => b.addEventListener('click', () => {
+    track.scrollTo({ left: cards[i].offsetLeft - track.offsetLeft - parseFloat(getComputedStyle(track).paddingLeft), behavior: 'smooth' });
+  }));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setActive(cards.indexOf(e.target)); });
+    }, { root: track, threshold: 0.6 });
+    cards.forEach(c => io.observe(c));
+  }
 }
 
 function initStrip() {
@@ -84,7 +112,8 @@ function initStrip() {
 }
 
 async function init() {
-  document.getElementById('trek-rows').innerHTML = TREKS.map(renderTrekRow).join('');
+  document.querySelector('[data-cards]').innerHTML = TREKS.map(renderTrekCard).join('');
+  initCarousel();
   const list = document.querySelector('[data-reviews]');
   if (list) list.innerHTML = REVIEWS.map(renderReview).join('');
   const score = document.querySelector('[data-review-score]');

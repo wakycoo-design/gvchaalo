@@ -4,6 +4,7 @@
 export const TREKS = [
   {
     slug: 'kedarkantha',
+    badge: 'Snow trek',
     code: 'KDK',
     name: 'Kedarkantha',
     posterName: 'KEDARKANTHA',
@@ -55,6 +56,7 @@ export const TREKS = [
   },
   {
     slug: 'annapurna-base-camp',
+    badge: 'Nepal',
     code: 'ABC',
     name: 'Annapurna Base Camp',
     posterName: 'ANNAPURNA BC',
@@ -105,6 +107,7 @@ export const TREKS = [
   },
   {
     slug: 'bhrigu-lake',
+    badge: 'Alpine lake',
     code: 'BHR',
     name: 'Bhrigu Lake',
     posterName: 'BHRIGU LAKE',

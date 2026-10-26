@@ -1,28 +1,26 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { renderTrekRow, nextDeparture } from '../assets/js/home.js';
+import { renderTrekCard, nextDeparture } from '../assets/js/home.js';
 import { getTrek } from '../assets/js/data/treks.js';
 
 test('nextDeparture skips sold-out batches', () => {
   assert.equal(nextDeparture(getTrek('kedarkantha')).id, '2026-12-13');
 });
 
-test('renderTrekRow links to the trip page and flags low seats in plain text', () => {
-  const html = renderTrekRow(getTrek('kedarkantha'), 0);
+test('renderTrekCard links to the trip page and flags low seats', () => {
+  const html = renderTrekCard(getTrek('kedarkantha'));
   assert.match(html, /href="trip\.html\?id=kedarkantha"/);
   assert.match(html, /4 seats left/);
   assert.match(html, /₹8,999/);
-  assert.doesNotMatch(html, /trek-row--flip/);
+  assert.match(html, /KEDARKANTHA/);
 });
 
-test('renderTrekRow alternates sides and shows the year for early-bird batches', () => {
-  const html = renderTrekRow(getTrek('bhrigu-lake'), 1);
-  assert.match(html, /trek-row--flip/);
-  assert.match(html, /21 Aug 2027/);
+test('renderTrekCard shows the year for early-bird batches', () => {
+  assert.match(renderTrekCard(getTrek('bhrigu-lake')), /21 Aug 2027/);
 });
 
-test('renderTrekRow has a Book now button for the next open batch', () => {
-  const html = renderTrekRow(getTrek('kedarkantha'), 0);
+test('renderTrekCard has a Book now button for the next open batch', () => {
+  const html = renderTrekCard(getTrek('kedarkantha'));
   assert.match(html, /<a class="btn[^"]*" href="book\.html\?trip=kedarkantha&amp;date=2026-12-13">Book now<\/a>/);
 });
 

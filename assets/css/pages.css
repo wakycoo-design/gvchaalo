@@ -9,40 +9,63 @@
   max-width: 18ch;
 }
 
-/* ---------- Home: trek rows ---------- */
+/* ---------- Home: swipeable trek cards ---------- */
 .treks { padding-top: calc(var(--section) * 0.75); }
-.trek-row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: center; }
-.trek-row + .trek-row { margin-top: var(--section); }
-.trek-row__media { grid-column: 1 / span 7; grid-row: 1; display: block; overflow: hidden; aspect-ratio: 4 / 3; background: #DCE3DF; }
-.trek-row__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease); }
-.trek-row__media:hover img { transform: scale(1.03); }
-.trek-row__body { grid-column: 9 / span 4; grid-row: 1; }
-.trek-row--flip .trek-row__media { grid-column: 6 / span 7; }
-.trek-row--flip .trek-row__body { grid-column: 1 / span 4; }
+.section-sub { margin-top: 4px; font-size: 1.0625rem; color: var(--muted); }
 
-.trek-row__name {
-  margin-top: 16px;
-  font-family: var(--display);
-  font-size: clamp(2.75rem, 5vw, 4.5rem);
-  font-weight: 400;
-  line-height: 0.92;
-  text-transform: uppercase;
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gutter); }
+.tcard {
+  position: relative; isolation: isolate; overflow: hidden;
+  aspect-ratio: 4 / 5.3; border-radius: 6px;
+  background: #14211A; color: var(--white);
 }
-.trek-row__name a:hover { color: var(--green); }
-.trek-row__tagline { margin-top: 20px; font-size: 1.0625rem; line-height: 1.6; color: var(--muted); }
+.tcard__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease); }
+.tcard:hover .tcard__img { transform: scale(1.04); }
+.tcard::after {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(8, 12, 10, 0.38) 0%, rgba(8, 12, 10, 0) 32%, rgba(8, 12, 10, 0) 44%, rgba(8, 12, 10, 0.86) 100%);
+}
+.tcard__badge {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  padding: 9px 18px; background: var(--green);
+  font-size: var(--fs-12); font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; white-space: nowrap;
+}
+.tcard__poster { position: absolute; top: 15%; left: 20px; right: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; pointer-events: none; }
+.tcard__poster-name { font-family: var(--display); font-size: clamp(2.5rem, 4.2vw, 3.5rem); line-height: 0.92; text-transform: uppercase; text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28); }
+.tcard__poster-sub { margin-top: 12px; font-size: var(--fs-12); font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4); }
+.tcard__body { position: absolute; left: 24px; right: 24px; bottom: 24px; display: grid; gap: 12px; }
+.tcard__status { justify-self: start; padding: 5px 10px; border: 1px solid rgba(255, 255, 255, 0.85); border-radius: 2px; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+.tcard__name { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25; }
+.tcard__link::after { content: ''; position: absolute; inset: 0; z-index: 0; }
+.tcard__link:focus-visible { outline: none; }
+.tcard:has(.tcard__link:focus-visible) { outline: 2px solid var(--green); outline-offset: 3px; }
+.tcard__meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--fs-14); }
+.tcard__meta li { display: inline-flex; align-items: center; gap: 6px; }
+.tcard__meta svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; opacity: 0.9; }
+.tcard__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 6px; padding-top: 14px; border-top: 1px solid rgba(255, 255, 255, 0.22); }
+.tcard__price { font-size: var(--fs-14); white-space: nowrap; }
+.tcard__price strong { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; }
+.tcard .btn { position: relative; z-index: 1; white-space: nowrap; flex: 0 0 auto; }
 
-.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; margin-top: 32px; }
-.facts div { padding-block: 14px; border-top: 1px solid var(--hairline); }
-.facts dt { font-size: var(--fs-12); color: var(--muted); }
-.facts dd { margin: 2px 0 0; font-weight: 500; }
-
-.trek-row__next { margin-top: 20px; font-size: var(--fs-14); color: var(--muted); }
-.trek-row__next strong { color: var(--ink); font-weight: 500; }
-.trek-row__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 28px; }
-
-@media (max-width: 900px) {
-  .trek-row__media, .trek-row--flip .trek-row__media { grid-column: 1 / -1; }
-  .trek-row__body, .trek-row--flip .trek-row__body { grid-column: 1 / -1; grid-row: 2; margin-top: 32px; }
+.cards__dots { display: none; }
+@media (max-width: 1000px) {
+  .cards {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .cards::-webkit-scrollbar { display: none; }
+  .tcard { flex: 0 0 min(84vw, 420px); scroll-snap-align: start; aspect-ratio: 4 / 6; }
+  .tcard__poster { top: 13%; }
+  .cards__dots { display: flex; justify-content: center; margin-top: 14px; }
+  .cards__dots button { position: relative; width: 26px; height: 32px; transition: width .4s var(--ease); }
+  .cards__dots button::before { content: ''; position: absolute; left: 9px; right: 9px; top: 12px; height: 8px; border-radius: 4px; background: #C9D1CC; transition: background-color .4s var(--ease); }
+  .cards__dots button[aria-current="true"] { width: 58px; }
+  .cards__dots button[aria-current="true"]::before { background: var(--green); }
+}
+@media (max-width: 600px) {
+  .tcard__body { left: 20px; right: 20px; bottom: 20px; gap: 10px; }
+  .tcard__price strong { font-size: 1.3rem; }
 }
 
 /* ---------- Home: about ---------- */
@@ -204,3 +227,5 @@ a.dep:hover { padding-left: 8px; color: var(--green); }
   .book-bar strong { font-size: var(--fs-20); font-weight: 500; }
   .page-trip .site-footer { padding-bottom: 80px; }
 }
+.only-touch { display: none; }
+@media (max-width: 1000px) { .only-touch { display: inline; } }
