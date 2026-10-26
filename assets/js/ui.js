@@ -36,11 +36,20 @@ function initAnchors() {
     if (!a) return;
     const url = new URL(a.href, location.href);
     if (url.pathname !== location.pathname) return;
-    if (scrollToHash(url.hash)) {
-      e.preventDefault();
-      history.replaceState(null, '', url.hash);
-    }
+    if (scrollToHash(url.hash)) e.preventDefault();
   });
+}
+
+// A fresh open or reload always starts at the hero. Phones otherwise reopen at the old
+// scroll spot, or at #treks left in the address bar. Back/forward still restores.
+function initStartAtTop() {
+  const nav = performance.getEntriesByType?.('navigation')[0];
+  if (nav?.type === 'back_forward') return;
+  const hash = location.hash;
+  if (hash) history.replaceState(null, '', location.pathname + location.search);
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (hash) requestAnimationFrame(() => scrollToHash(hash));
+  else window.scrollTo(0, 0);
 }
 
 function initHeader() {
@@ -136,5 +145,5 @@ export function initUI() {
   initMenu();
   initFab();
   observeReveals();
-  if (location.hash) requestAnimationFrame(() => scrollToHash(location.hash));
+  initStartAtTop();
 }
