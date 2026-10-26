@@ -95,9 +95,9 @@
 .about__team { margin-top: 28px; }
 
 /* ---------- Our Team ---------- */
-.team-head { padding-top: clamp(48px, 7vw, 96px); padding-bottom: clamp(40px, 5vw, 72px); }
+.team-head { padding-top: clamp(32px, 4vw, 48px); padding-bottom: clamp(28px, 3vw, 40px); }
 .team-head__title, .team-lead__name { font-family: 'Oswald', var(--display); font-weight: 600; line-height: 1; letter-spacing: -0.005em; }
-.team-head__title { margin-top: 18px; font-size: var(--fs-hero); }
+.team-head__title { margin-top: 12px; font-size: clamp(2.75rem, 5.5vw, 4.5rem); }
 
 .team-lead { align-items: end; }
 .team-lead__media { grid-column: 1 / span 6; width: 80%; overflow: hidden; aspect-ratio: 1166 / 1600; background: #DCE3DF; }
@@ -122,6 +122,11 @@
 .team-cta { padding-block: clamp(96px, 12vw, 180px); text-align: center; }
 .team-cta__title { font-size: var(--fs-96); margin-bottom: 36px; }
 
+@media (min-width: 901px) {
+  /* Caption, photo and intro fit in one laptop screen. */
+  .team-lead__media { grid-column: 1 / span 4; width: auto; height: min(64vh, 640px); justify-self: start; }
+  .team-lead__text { grid-column: 6 / span 6; }
+}
 @media (max-width: 900px) {
   .team-lead__media, .team-lead__text { grid-column: 1 / -1; }
   .team-lead__text { margin-top: 40px; }

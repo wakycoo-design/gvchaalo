@@ -7,7 +7,7 @@ const read = f => readFileSync(new URL(`../${f}`, import.meta.url), 'utf8');
 test('team page shows Saleel under the Who\'s Chaalo-ing caption', () => {
   const html = read('team.html');
   assert.match(html, /<title>Our Team · gv\.chaalo<\/title>/);
-  assert.match(html, /Who's<br>Chaalo-ing/);
+  assert.match(html, /Who's Chaalo-ing/);
   assert.match(html, /id="lead-name"[^>]*>Saleel</);
   for (const img of html.matchAll(/src="(assets\/img\/saleel-[^"]+)"/g)) {
     assert.ok(existsSync(new URL(`../${img[1]}`, import.meta.url)), img[1]);
