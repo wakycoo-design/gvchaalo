@@ -128,8 +128,17 @@
   .team-lead__text { grid-column: 6 / span 6; }
 }
 @media (max-width: 900px) {
-  .team-lead__media, .team-lead__text { grid-column: 1 / -1; }
-  .team-lead__text { margin-top: 40px; }
+  /* Photo and intro share the first phone screen: name beside the photo, story below. */
+  .team-head__title { font-size: 2.5rem; }
+  .team-lead { align-items: end; }
+  .team-lead__media { grid-column: 1 / span 7; }
+  .team-lead__text { display: contents; }
+  .team-lead__id { grid-column: 8 / -1; grid-row: 1; }
+  .team-lead__text > :not(.team-lead__id) { grid-column: 1 / -1; }
+  .team-lead__name { margin-top: 8px; font-size: 2.75rem; }
+  .team-lead__lede { margin-top: 0; padding-top: 14px; font-size: 1.0625rem; }
+  .team-lead__lede--quiet { padding-top: 10px; }
+  .team-lead__ask { margin-top: 12px; }
   .team-trail__item--a, .team-trail__item--b { grid-column: 1 / -1; margin-top: 0; }
 }
 
